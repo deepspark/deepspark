@@ -13,6 +13,6 @@ Deeplearning framework running on Spark
 
 # running demos
 Sample running scripts are on scripts/
-* runCIFAR.sh
-* runImageNet.sh
-
+* runCIFAR.sh: CIFAR10 demo
+* runImageNet.sh: imagenet demo
+* modelConvert.sh: convert DeepSpark weight to caffemodel
