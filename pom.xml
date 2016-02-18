@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.acl</groupId>
+    <artifactId>deepspark</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>deepspark</name>
+  <url>http://maven.apache.org</url>
+  <build>
+  	<plugins>
+  	  <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+  	  <plugin>
+		<artifactId>maven-assembly-plugin</artifactId>
+		<version>2.2</version>
+		<configuration>
+			<descriptorRefs>
+				<descriptorRef>jar-with-dependencies</descriptorRef>
+			</descriptorRefs>
+		</configuration>
+		<executions>
+			<execution>
+				<id>make-assembly</id>
+				<phase>package</phase>
+				<goals>
+					<goal>single</goal>
+				</goals>
+			</execution>
+		</executions>
+      </plugin>
+  	</plugins>
+  </build>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+	<dependency>
+		<groupId>com.google.protobuf</groupId>
+		<artifactId>protobuf-java</artifactId>
+		<version>3.0.0-beta-1</version>
+	</dependency>
+	<dependency>
+		<groupId>net.java.dev.jna</groupId>
+		<artifactId>jna</artifactId>
+		<version>4.2.1</version>
+	</dependency>
+	
+	<dependency> <!-- Spark dependency -->
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.10</artifactId>
+      <scope>provided</scope>
+      <version>1.5.1</version>
+    </dependency>
+    
+	<dependency>
+	  <groupId>org.deephacks.lmdbjni</groupId>
+	  <artifactId>lmdbjni</artifactId>
+	  <version>0.4.5</version>
+	</dependency>
+	
+	<dependency>
+	  <groupId>org.deephacks.lmdbjni</groupId>
+	  <artifactId>lmdbjni-linux64</artifactId>
+	  <version>0.4.5</version>
+	</dependency>
+	
+	<dependency>
+	  <groupId>org.deephacks.lmdbjni</groupId>
+	  <artifactId>lmdbjni-win64</artifactId>
+	  <version>0.4.5</version>
+	</dependency>
+  </dependencies>
+  
+  <repositories>
+  	<repository>
+  		<id>fusesource.nexus.snapshot</id>
+  		<name>FuseSource Community Snapshot Repository</name>
+  		<url>http://repo.fusesource.com/nexus/content/groups/public-snapshots</url>
+  	</repository>
+  </repositories>
+</project>
