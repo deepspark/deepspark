@@ -1,0 +1,10 @@
+base_lr: 0.05
+gamma: 0.2
+stepsize: 100000
+lr_policy: "step"
+max_iter: 100000
+momentum: 0.0
+weight_decay: 0.0002
+solver_mode: GPU
+snapshot: 1000
+snapshot_prefix: "imagenet_test"

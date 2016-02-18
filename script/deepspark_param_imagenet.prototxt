@@ -1,0 +1,11 @@
+period: 50
+moving_rate: 0.1
+
+# decay_rate: 0.1
+# decay_step: 
+# decay_limit: 1
+
+# server_factor: 1
+# factor_decay_step: 10000
+# factor_decay_rate: 0.1
+# factor_decay_limit: 1
