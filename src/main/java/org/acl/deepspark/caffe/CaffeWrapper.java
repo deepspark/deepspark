@@ -61,6 +61,11 @@ public class CaffeWrapper implements Serializable {
 		
 		public void set_mode(int data);
 		public void snapshotNet(Pointer solver,String filename);
+		public void restoreNet(Pointer solver,String filename);
+	}
+	
+	public void restore(String filename) {
+		CaffeInterface.INSTANCE.restoreNet(ptrSolver, filename);
 	}
 	
 	public void snapshot(String filename) {

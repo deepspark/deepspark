@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.acl.deepspark.caffe.CaffeWrapper;
+import org.acl.deepspark.data.ByteRecord;
 import org.acl.deepspark.data.LMDBWriter;
 import org.acl.deepspark.data.Record;
 import org.acl.deepspark.data.RecordBatch;
@@ -66,8 +67,8 @@ public class DistNet implements Serializable {
 					dir.mkdirs();
 				
 				LMDBWriter d = new LMDBWriter(source, batchsize);
-				Record s = new Record();
-				s.data = new float[dummySize[0] * dummySize[1] * dummySize[2]];
+				ByteRecord s = new ByteRecord();
+				s.data = new byte[dummySize[0] * dummySize[1] * dummySize[2]];
 				s.label = 0;
 				s.dim = new int[] {dummySize[0], dummySize[1], dummySize[2]};
 						
@@ -124,7 +125,7 @@ public class DistNet implements Serializable {
         
         if(trainIdx == -1) {
         	// error handling
-        	
+        	System.out.println("cannot find training data layer...");
         } else {
 	        LayerParameter trainingDataLayer = layers.get(trainIdx);
 	        trainingDataName = trainingDataLayer.getName();
@@ -221,6 +222,9 @@ public class DistNet implements Serializable {
     	netLearner.snapshot(filename);
     }
     
+    public void restore(String filename) {
+    	netLearner.restore(filename);
+    }
     
     public List<Weight> getGradients() {
     	List<float[]> list = netLearner.getGradients();
@@ -319,5 +323,9 @@ public class DistNet implements Serializable {
     		Weight w = list.get(i);
     		System.out.println(String.format("Layer%d, # of parameter: %d", i, w.data.length));
     	}
+    }
+    
+    public void close() {
+    	netLearner.clearSolver();
     }
 }

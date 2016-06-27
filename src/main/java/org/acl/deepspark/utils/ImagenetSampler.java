@@ -29,7 +29,7 @@ public class ImagenetSampler {
         System.out.println("number of executors = " + numExecutors);
         System.out.println("Data Loading...");
         JavaPairRDD<FloatWritable, ArrayPrimitiveWritable> train_seq = 
-        		sc.sequenceFile(args[2], FloatWritable.class, ArrayPrimitiveWritable.class);
+        		sc.sequenceFile(args[1], FloatWritable.class, ArrayPrimitiveWritable.class);
         
         JavaRDD<Record> train_samples = train_seq.map(new Function<Tuple2<FloatWritable,ArrayPrimitiveWritable>, Record>() {
         	@Override
@@ -60,7 +60,7 @@ public class ImagenetSampler {
 			}
 		});
         
-        JavaRDD<Record> shuffled_data = shuffled.repartition(numExecutors).sortByKey().values();
+        JavaRDD<Record> shuffled_data = shuffled.sortByKey().values();
         
         JavaPairRDD<FloatWritable, ArrayPrimitiveWritable> toSave = shuffled_data.mapToPair(new PairFunction<Record, FloatWritable, ArrayPrimitiveWritable>() {
 
@@ -73,7 +73,7 @@ public class ImagenetSampler {
 			}
 		});
         
-        toSave.saveAsHadoopFile("imagenet_sampled.hsf", FloatWritable.class, ArrayPrimitiveWritable.class, SequenceFileOutputFormat.class);
+        toSave.saveAsHadoopFile(args[2], FloatWritable.class, ArrayPrimitiveWritable.class, SequenceFileOutputFormat.class);
         
         sc.close();	
 	}

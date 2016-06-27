@@ -83,9 +83,9 @@ public class AsyncEASGDCIFARLocalTest {
         Date endTime = new Date();
         
         driver.saveWeight("final_cifar.weight");
-        float[] a = driver.testWithLMDB();
+        // float[] a = driver.testWithLMDB();
         long time = endTime.getTime() - startTime.getTime();
         System.out.println(String.format("Training time: %f secs", (double) time / 1000));
-        System.out.println(String.format("Accuracy: %f ", a[0]));
+        //System.out.println(String.format("Accuracy: %f ", a[0]));
     }
 }

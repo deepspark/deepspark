@@ -22,7 +22,7 @@ import scala.Tuple2;
 /**
  * Created by Hanjoo on 2016-01-18.
  */
-public class AsyncEASGDImageNetTest {
+public class AsyncEASGDImageNetVarTest {
     public static void main(String[] args) throws Exception {
     	SparkConf conf = new SparkConf().setAppName("AsyncImageNetTest")
                 .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer");
@@ -68,7 +68,7 @@ public class AsyncEASGDImageNetTest {
         Date startTime = new Date();
         
         //train local
-        driver.trainWithLMDB(rddkey, "tmp_image", numExecutors);
+        driver.trainWithLMDBVarTau(rddkey, "tmp_image", numExecutors);
         
         Date endTime = new Date();
         	

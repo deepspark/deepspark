@@ -69,7 +69,38 @@ public class LMDBWriter implements Serializable {
 		return datum;
 	}
 	
+	private Datum convert2Datum(ByteRecord sample) {	
+		byte[] bytes = new byte[sample.data.length];
+		for (int i = 0 ; i< bytes.length; i++)
+			bytes[i] = (byte) ((int) sample.data[i] & 0xff);
+		
+		Datum datum = Datum.newBuilder().setWidth(sample.dim[2])
+										.setHeight(sample.dim[1])
+										.setChannels(sample.dim[0])
+										.setData(ByteString.copyFrom(bytes))
+										.setLabel((int) sample.label)
+										.build();
+		return datum;
+	}
+	
 	public void putSample(Record sample) {
+		if(count == th) {
+			tx.commit();
+			count = 0;
+		}
+		
+		if(count == 0)
+			tx = env.createWriteTransaction();
+		
+		Datum d = convert2Datum(sample);
+		
+		byte[] array =d.toByteArray();
+		
+		dbInstance.put(tx,String.format("%08d",totalCount++).getBytes(), array);
+		count++;
+	}
+	
+	public void putSample(ByteRecord sample) {
 		if(count == th) {
 			tx.commit();
 			count = 0;
